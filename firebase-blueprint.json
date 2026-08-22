@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "UserProfile": {
+      "collection": "users",
+      "fields": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Full name" },
+        "photoURL": { "type": "string", "description": "Profile picture URL" },
+        "role": { "type": "string", "description": "customer, professional, or admin" },
+        "savedPros": { "type": "array", "description": "Array of saved professional IDs" },
+        "savedParts": { "type": "array", "description": "Array of saved spare part IDs" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "allowRead": "auth != null",
+      "allowCreate": "auth != null && request.auth.uid == request.resource.data.uid",
+      "allowUpdate": "auth != null && (request.auth.uid == resource.data.uid || request.auth.uid == request.resource.data.uid)",
+      "allowDelete": "auth != null && request.auth.uid == resource.data.uid"
+    },
+    "Diagnosis": {
+      "collection": "diagnoses",
+      "fields": {
+        "userId": { "type": "string", "description": "UID of the user or 'anonymous'" },
+        "itemName": { "type": "string", "description": "Item name" },
+        "category": { "type": "string", "description": "Item category" },
+        "userProblemDescription": { "type": "string", "description": "User problem description" },
+        "possibleProblem": { "type": "string", "description": "Diagnosed root issue" },
+        "confidence": { "type": "number", "description": "Confidence percentage" },
+        "severity": { "type": "string", "description": "low, medium, high, critical" },
+        "summary": { "type": "string", "description": "Summary text" },
+        "repairWorthiness": { "type": "object", "description": "Financial and environmental assessment" },
+        "recommendedNextAction": { "type": "object", "description": "Recommended next step" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "allowRead": "auth != null",
+      "allowCreate": "auth != null",
+      "allowUpdate": "auth != null && resource.data.userId == request.auth.uid",
+      "allowDelete": "auth != null && resource.data.userId == request.auth.uid"
+    },
+    "RepairRequest": {
+      "collection": "repairRequests",
+      "fields": {
+        "userId": { "type": "string", "description": "UID of customer" },
+        "customerName": { "type": "string", "description": "Name" },
+        "customerPhone": { "type": "string", "description": "Phone number" },
+        "customerEmail": { "type": "string", "description": "Email" },
+        "address": { "type": "string", "description": "Service location" },
+        "professionalId": { "type": "string", "description": "Assigned technician ID" },
+        "professionalName": { "type": "string", "description": "Technician name" },
+        "itemName": { "type": "string", "description": "Damaged product" },
+        "category": { "type": "string", "description": "Category" },
+        "issueSummary": { "type": "string", "description": "Summary of problem" },
+        "status": { "type": "string", "description": "submitted, assigned, in_progress, completed, cancelled" },
+        "scheduledDate": { "type": "string", "description": "Date of appointment" },
+        "timeSlot": { "type": "string", "description": "Time window" },
+        "estimatedCost": { "type": "number", "description": "Estimated cost" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "allowRead": "auth != null",
+      "allowCreate": "auth != null",
+      "allowUpdate": "auth != null",
+      "allowDelete": "auth != null && resource.data.userId == request.auth.uid"
+    },
+    "SustainabilityRecord": {
+      "collection": "sustainabilityRecords",
+      "fields": {
+        "userId": { "type": "string", "description": "User UID" },
+        "itemsRepaired": { "type": "number", "description": "Count of items repaired" },
+        "carbonAvoidedKg": { "type": "number", "description": "CO2 emissions avoided" },
+        "wasteDivertedKg": { "type": "number", "description": "E-waste diverted" },
+        "savingsRupees": { "type": "number", "description": "Money saved in INR" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "allowRead": "auth != null",
+      "allowCreate": "auth != null",
+      "allowUpdate": "auth != null && resource.data.userId == request.auth.uid",
+      "allowDelete": "auth != null && resource.data.userId == request.auth.uid"
+    }
+  }
+}

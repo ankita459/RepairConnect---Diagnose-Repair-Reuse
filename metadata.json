@@ -1,0 +1,6 @@
+{
+  "name": "RepairConnect — Diagnose, Repair & Reuse",
+  "description": "AI-assisted item diagnosis, repair-worthiness estimation, local repair professional discovery, spare parts matching, and sustainability tracking platform.",
+  "requestFramePermissions": ["camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
